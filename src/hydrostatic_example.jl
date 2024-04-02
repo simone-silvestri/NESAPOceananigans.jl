@@ -14,6 +14,7 @@ function ocean_grid_setup(arch, bottom_height;
                                  size = (Nx, Ny, Nz), 
                                  latitude = (-75, 75),
                                  longitude = (0, 360),
+                                 halo = (7, 7, 7),
                                  z = collect(variable_z_faces))
 
     if !isnothing(bottom_height)
@@ -133,7 +134,7 @@ Keyword Arguments:
                       if `false` the tracer tendency kernel is three-dimensional and launched over the whole grid
 """
 function momentum_kernel_test(arch; 
-                              momentum_advection = ocean_tracer_advection(), 
+                              momentum_advection = ocean_momentum_advection(), 
                               bottom_height = nothing,
                               active_cells_map = true)
 
@@ -156,7 +157,7 @@ function momentum_kernel_test(arch;
 end
 
 """
-    full_ocean_test(arch; 
+    ocean_test(arch; 
                     momentum_advection = ocean_momentum_advection(), 
                     tracer_advection = ocean_tracer_advection(), 
                     bottom_height = nothing,
@@ -194,7 +195,7 @@ Keyword Arguments:
 - `active_cells_map`: if `true` the tracer tendency kernel is linear and launched only over immersed cells,
                       if `false` the tracer tendency kernel is three-dimensional and launched over the whole grid
 """
-function full_ocean_kernel_test(arch; 
+function ocean_kernel_test(arch; 
                                 momentum_advection = ocean_momentum_advection(), 
                                 tracer_advection = ocean_tracer_advection(),
                                 bottom_height = nothing,

@@ -4,12 +4,14 @@ export set_problem_size!
 export run_model_benchmark!
 export tracer_kernel_test
 export momentum_kernel_test
-export full_ocean_kernel_test
+export ocean_kernel_test
+export random_bathymetry, ocean_bathymetry
 
 using Oceananigans
 using BenchmarkTools
 using SeawaterPolynomials
 using NVTX
+using CUDA
 
 using Oceananigans.Architectures: architecture
 
@@ -25,6 +27,7 @@ function set_problem_size!(Nx, Ny, Nz)
     return nothing
 end
 
+include("ocean_bathymetry.jl")
 include("hydrostatic_example.jl")
 include("run_model_benchmark.jl")
 

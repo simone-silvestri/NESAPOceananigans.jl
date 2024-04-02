@@ -30,11 +30,11 @@ function run_model_benchmark!(test_function,
 
     if use_benchmarktools
         benchmark = @benchmark begin
-            CUDA.@sync run_benchmark!(model, test_function)
+            run_benchmark!($model, $arch, $test_function)
         end samples = number_of_samples
     else
         for samples in number_of_samples
-            run_benchmark!(model, test_function)
+            run_benchmark!(model, arch, test_function)
             GC.gc()
         end
         benchmark = nothing
@@ -45,5 +45,7 @@ end
 
 TendencyTests = Union{typeof(tracer_kernel_test), typeof(momentum_kernel_test)}
 
-run_benchmark!(model, test_function)   = time_step!(model, 1)
-run_benchmark!(model, ::TendencyTests) = compute_tendencies!(model)
+run_benchmark!(model, ::CPU, test_function)   = time_step!(model, 1)
+run_benchmark!(model, ::GPU, test_function)   = CUDA.@sync time_step!(model, 1)
+run_benchmark!(model, ::CPU, ::TendencyTests) = compute_tendencies!(model, [])
+run_benchmark!(model, ::GPU, ::TendencyTests) = CUDA.@sync compute_tendencies!(model, [])
