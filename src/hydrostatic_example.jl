@@ -4,9 +4,9 @@ function ocean_grid_setup(arch, bottom_height;
 
     # We choose a size that saturates the GPU. 
     # A quarter degree "near-global" ocean spanning 75 south to 75 north is enough
-    Nx = 1440
-    Ny = 600
-    Nz = 50
+    Nx = grid_size[1]
+    Ny = grid_size[2]
+    Nz = grid_size[3]
 
     variable_z_faces = range(-6000, 0, length = Nz+1)
 
@@ -26,7 +26,7 @@ end
 # Random initial velocities
 function initial_ocean_velocities(grid)
 
-    arch = architecute(grid)
+    arch = architecture(grid)
 
     u = XFaceField(grid)
     v = YFaceField(grid)
