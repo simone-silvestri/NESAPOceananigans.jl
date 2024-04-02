@@ -157,7 +157,7 @@ function momentum_kernel_test(arch;
 end
 
 """
-    ocean_test(arch; 
+   ocean_model_test(arch; 
                     momentum_advection = ocean_momentum_advection(), 
                     tracer_advection = ocean_tracer_advection(), 
                     bottom_height = nothing,
@@ -195,11 +195,11 @@ Keyword Arguments:
 - `active_cells_map`: if `true` the tracer tendency kernel is linear and launched only over immersed cells,
                       if `false` the tracer tendency kernel is three-dimensional and launched over the whole grid
 """
-function ocean_kernel_test(arch; 
-                                momentum_advection = ocean_momentum_advection(), 
-                                tracer_advection = ocean_tracer_advection(),
-                                bottom_height = nothing,
-                                active_cells_map = true)
+function ocean_model_test(arch; 
+                          momentum_advection = ocean_momentum_advection(), 
+                          tracer_advection = ocean_tracer_advection(),
+                          bottom_height = nothing,
+                          active_cells_map = true)
 
     grid = ocean_grid_setup(arch, bottom_height; active_cells_map)
 

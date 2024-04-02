@@ -2,9 +2,7 @@ module NESAPOceananigans
 
 export set_problem_size!
 export run_model_benchmark!
-export tracer_kernel_test
-export momentum_kernel_test
-export ocean_kernel_test
+export tracer_kernel_test, momentum_kernel_test, ocean_model_test
 export random_bathymetry, ocean_bathymetry
 
 using Oceananigans
