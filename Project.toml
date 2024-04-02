@@ -3,6 +3,12 @@ uuid = "39df175f-fbd4-440a-99a6-d607917340a7"
 authors = ["Simone Silvestri"]
 version = "1.0.0-DEV"
 
+[deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+NVTX = "5da4648a-3479-48b8-97b9-01cb529c0a1f"
+Oceananigans = "9e8cae18-63c1-5223-a75c-80ca9d6e9a09"
+SeawaterPolynomials = "d496a93d-167e-4197-9f49-d3af4ff8fe40"
+
 [compat]
 julia = "1"
 
