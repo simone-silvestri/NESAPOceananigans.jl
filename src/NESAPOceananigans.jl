@@ -5,7 +5,8 @@ export run_model_benchmark!
 export tracer_kernel_test, momentum_kernel_test, ocean_model_test
 export random_bathymetry, ocean_bathymetry
 
-using Oceananigans
+using Reexport
+@reexport using Oceananigans
 using BenchmarkTools
 using SeawaterPolynomials
 using NVTX
