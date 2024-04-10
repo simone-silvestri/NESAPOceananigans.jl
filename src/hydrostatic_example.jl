@@ -141,7 +141,7 @@ function momentum_kernel_test(arch;
     grid = ocean_grid_setup(arch, bottom_height; active_cells_map)
 
     velocities   = initial_ocean_velocities(grid)
-    free_surface = SplitExplicitFreeSurface(; grid, cfl = 0.7)
+    free_surface = SplitExplicitFreeSurface(grid; cfl = 0.7)
     
     model = HydrostaticFreeSurfaceModel(; grid, 
                                           tracers = (),
@@ -204,7 +204,7 @@ function ocean_model_test(arch;
     grid = ocean_grid_setup(arch, bottom_height; active_cells_map)
 
     velocities   = initial_ocean_velocities(grid)
-    free_surface = SplitExplicitFreeSurface(; grid, cfl = 0.7)
+    free_surface = SplitExplicitFreeSurface(grid; cfl = 0.7)
     buoyancy     = SeawaterBuoyancy(equation_of_state = TES10EquationOfState())
     coriolis     = HydrostaticSphericalCoriolis(scheme = ActiveCellEnstrophyConserving())
     closure      = VerticalScalarDiffusivity(ν = 1e-5, κ = 1e-5)
