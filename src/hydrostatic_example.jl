@@ -1,4 +1,4 @@
-using SeawaterPolynomials: TES10EquationOfState
+using SeawaterPolynomials.TEOS10: TES10EquationOfState
 
 function ocean_grid_setup(arch, bottom_height;
                           active_cells_map = true)
