@@ -1,3 +1,4 @@
+using SeawaterPolynomials
 
 function ocean_grid_setup(arch, bottom_height;
                           active_cells_map = true)
