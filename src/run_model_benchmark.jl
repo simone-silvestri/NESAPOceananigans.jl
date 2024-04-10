@@ -23,7 +23,7 @@ Run a benchmark in the NESAPOceananigans repository.
 function run_model_benchmark!(test_function,
                               arch; 
                               use_benchmarktools = true,
-                              number_of_samples = 10,
+                              number_of_samples = 5,
                               test_kwargs...)
 
     model = test_function(arch; test_kwargs...)

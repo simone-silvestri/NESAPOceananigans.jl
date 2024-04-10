@@ -22,14 +22,17 @@ set_problem_size!(10, 10, 10)
 # default                 -> the best compromise between stability and accuracy. Very expensive
 
 # Tracer advection benchmark
-@show trial1 = run_model_benchmark!(tracer_kernel_test, arch)
+@show trial1 = run_model_benchmark!(tracer_kernel_test, arch;
+                                    use_benchmarktools = false)
 
 # Simple advection benchmark
 @show trial2 = run_model_benchmark!(tracer_kernel_test, arch;
+                                    use_benchmarktools = false,
                                     tracer_advection = Centered())
 
 # Simple advection benchmark with a bathymetry
 @show trial3 = run_model_benchmark!(tracer_kernel_test, arch;
+                                    use_benchmarktools = false,
                                     tracer_advection = Centered(),
                                     bottom_height = random_bathymetry())
                        
@@ -42,12 +45,40 @@ set_problem_size!(10, 10, 10)
 # default                 -> the best compromise between stability and accuracy. Very expensive
 
 # Momentum advection benchmark
-@show trial1 = run_model_benchmark!(momentum_kernel_test, arch)
+@show trial1 = run_model_benchmark!(momentum_kernel_test, arch;
+                                    use_benchmarktools = false)
 
 # Simple advection benchmark
 @show trial2 = run_model_benchmark!(momentum_kernel_test, arch;
+                                    use_benchmarktools = false,
                                     momentum_advection = VectorInvariant())
 
 @show trial3 = run_model_benchmark!(momentum_kernel_test, arch;
+                                    use_benchmarktools = false,
                                     momentum_advection = VectorInvariant(),
                                     bottom_height = random_bathymetry())
+                       
+# In this test we are looking at the full ocean. 
+# `momentum_advection` is a keyword argument for this test.
+# The choices are:
+# VectorInvariant()       -> the simplest (non-feasible) momentum advection scheme
+# UpwindBiased(order = 3) -> the simplest (feasible) momentum advection scheme
+# WENO(order = 5)         -> a standard "average-performing" momentum advection scheme
+# default                 -> the best compromise between stability and accuracy. Very expensive
+
+# Momentum advection benchmark
+@show trial1 = run_model_benchmark!(ocean_model_test, arch;
+                                    use_benchmarktools = false,
+                                    bottom_height = ocean_bathymetry())
+
+# Simple advection benchmark
+@show trial2 = run_model_benchmark!(ocean_model_test, arch;
+                                    use_benchmarktools = false,
+                                    momentum_advection = VectorInvariant(),
+                                    bottom_height = ocean_bathymetry())
+
+@show trial3 = run_model_benchmark!(ocean_model_test, arch;
+                                    use_benchmarktools = false,
+                                    momentum_advection = VectorInvariant(),
+                                    tracer_advection = Centered(),
+                                    bottom_height = ocean_bathymetry())
