@@ -1,4 +1,4 @@
-using SeawaterPolynomials.TEOS10: TES10EquationOfState
+using SeawaterPolynomials.TEOS10: TEOS10EquationOfState
 
 function ocean_grid_setup(arch, bottom_height;
                           active_cells_map = true)
@@ -210,7 +210,7 @@ function ocean_model_test(arch;
 
     velocities   = initial_ocean_velocities(grid)
     free_surface = SplitExplicitFreeSurface(grid; cfl = 0.7)
-    buoyancy     = SeawaterBuoyancy(equation_of_state = TES10EquationOfState())
+    buoyancy     = SeawaterBuoyancy(equation_of_state = TEOS10EquationOfState())
     coriolis     = HydrostaticSphericalCoriolis(scheme = ActiveCellEnstrophyConserving())
     closure      = VerticalScalarDiffusivity(ν = 1e-5, κ = 1e-5)
 
