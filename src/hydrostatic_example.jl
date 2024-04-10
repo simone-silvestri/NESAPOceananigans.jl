@@ -201,6 +201,10 @@ function ocean_model_test(arch;
                           bottom_height = nothing,
                           active_cells_map = true)
 
+    if !isnothing(bottom_height)
+        set_problem_size!(size(bottom_height)..., grid_size[3])
+    end
+    
     grid = ocean_grid_setup(arch, bottom_height; active_cells_map)
 
     velocities   = initial_ocean_velocities(grid)
