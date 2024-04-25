@@ -25,13 +25,13 @@ $JULIA --project --check-bounds=no -e 'using Pkg; Pkg.instantiate()'
 NWORK=$((NNODES * NTASKS))
 echo $NWORK
 
+cd ${FOLDER}
+
 for i in $(seq 0 10); do
 
 echo "case number ${i}"
 
 export CASE=${i}
-
-cd ${FOLDER}
 
 srun --ntasks-per-node 1 dcgmi profile --pause
 srun ncu -o report_output${i} --target-processes all --set full ./launch.sh $JULIA --check-bounds=no --project hydrostatic_benchmark.jl 
