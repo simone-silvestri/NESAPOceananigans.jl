@@ -20,12 +20,10 @@ exec \$*
 EoF_s
 chmod +x launch.sh
 
-$JULIA --project --check-bounds=no -e 'using Pkg; Pkg.instantiate()'
+$JULIA --project=environments/${BRANCH} --check-bounds=no -e 'using Pkg; Pkg.instantiate()'
 
 NWORK=$((NNODES * NTASKS))
 echo $NWORK
-
-cd ${FOLDER}
 
 for i in $(seq 0 10); do
 
@@ -34,7 +32,7 @@ echo "case number ${i}"
 export CASE=${i}
 
 srun --ntasks-per-node 1 dcgmi profile --pause
-srun ncu -o report_output${i} --target-processes all --set full ./launch.sh $JULIA --check-bounds=no --project hydrostatic_benchmark.jl 
+srun ncu -o report_${BRANCH}_${i} --target-processes all --set full ./launch.sh $JULIA --check-bounds=no --project=environments/${BRANCH} benchmarks/hydrostatic_benchmark.jl 
 srun --ntasks-per-node 1 dcgmi profile --resume
 
 done
