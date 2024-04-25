@@ -1,7 +1,7 @@
 using NESAPOceananigans
 
 # Choices for the architecture are `CPU` or `GPU` for a single core
-arch = GPU()
+arch = CPU()
 
 # By default the problem size is 1440×600×50 which corresponds to about 
 # 10 GB for the full ocean testcase which should saturate the GPU compute
