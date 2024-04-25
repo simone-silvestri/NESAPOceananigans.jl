@@ -2,7 +2,7 @@ using JLD2
 
 function ocean_bathymetry()
     
-    file = jldopen("../data/bathymetry-1440x600.jld2")
+    file = jldopen("data/bathymetry-1440x600.jld2")
 
     return file["bathymetry"]
 end
