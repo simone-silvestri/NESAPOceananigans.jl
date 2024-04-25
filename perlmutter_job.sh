@@ -32,7 +32,7 @@ echo "case number ${i}"
 export CASE=${i}
 
 srun --ntasks-per-node 1 dcgmi profile --pause
-srun ncu -o report_output${i} --target-processes all --set full ./launch.sh $JULIA --check-bounds=no --project benchmarks/hydrostatic_benchmark.jl 
+srun ncu -o report_output${i} --target-processes all --set full ./launch.sh $JULIA --check-bounds=no --project=${FOLDER} ${FOLDER}/hydrostatic_benchmark.jl 
 srun --ntasks-per-node 1 dcgmi profile --resume
 
 done
